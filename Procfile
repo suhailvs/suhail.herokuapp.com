@@ -1,0 +1,1 @@
+web: gunicorn suhail.wsgi --log-file -
