@@ -17,7 +17,7 @@
       {% for mood in moods %}
       <tr>
       	<td>{{mood.get_moodswing_display}}</td>
-      	<td>{{ mood.created_at|date:"D d M" }}</td>
+      	<td>{{ mood.created_at|date:"D d M H:i" }}</td>
       </tr>
       {% endfor %}
     </tbody>
