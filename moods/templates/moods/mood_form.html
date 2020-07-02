@@ -3,11 +3,18 @@
 {% block content %}
   <h2>Enter your mood</h2>
   <form method="post">{% csrf_token %}
-	  <select class="form-control" name="{{form.moodswing.name}}" onchange="this.form.submit()">
-	  	{% for value, text in form.moodswing.field.choices %}
-			    <option value="{{ value }}">{{ text }}</option>
-			{% endfor %}
-	  </select>
+    <div class="form-row">
+      <div class="form-group col-md-10">
+  	  <select class="form-control" name="{{form.moodswing.name}}" onchange="onSubmit(this)">
+  	  	{% for value, text in form.moodswing.field.choices %}
+  			    <option value="{{ value }}">{{ text }}</option>
+  			{% endfor %}
+  	  </select>
+      </div>
+      <div class="form-group col-md-2">
+        <input id="txtpassword" type="text" name="password" class="form-control">
+      </div>
+    </div>
 	</form><hr>
   <table class="table table-striped table-bordered">
     <thead>
@@ -17,9 +24,21 @@
       {% for mood in moods %}
       <tr>
       	<td>{{mood.get_moodswing_display}}</td>
-      	<td>{{ mood.created_at|date:"D d M H:i" }}</td>
+      	<td>{{ mood.created_at|date:"ga D d M" }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+function onSubmit(selectObject) {
+  let pass = document.getElementById("txtpassword").value;
+  if (pass==1) {
+    selectObject.form.submit()
+  }
+  
+}
+</script>
 {% endblock %}
